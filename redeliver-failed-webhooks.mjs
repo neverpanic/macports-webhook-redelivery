@@ -11,7 +11,10 @@ async function checkAndRedeliverWebhooks() {
   const LAST_REDELIVERY_FILE = process.env.LAST_REDELIVERY_FILE;
   // Trac gets overwhelmed when re-delivering too quickly, and we don't care if
   // it takes a little longer to run this script, so slow down a bit.
-  const SLEEP_BETWEEN_REDELIVERIES = 3000;
+  //
+  // Make this more than 5 seconds so the buildbot doesn't group them together,
+  // see https://github.com/macports/macports-infrastructure/blob/1dbfe28715494d1973fa5e5c6daae4cf3d9b9078/buildbot/master.cfg#L269.
+  const SLEEP_BETWEEN_REDELIVERIES = 6000;
 
   const repo_name = process.env.REPO;
   const repo_owner = process.env.REPO_OWNER;
